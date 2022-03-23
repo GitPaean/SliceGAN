@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import matplotlib.pyplot as plt
 import tifffile
-def batch(data,type,l, sf):
+def batch(data,type,l, sf, vis=True):
     """
     Generate a batch of images randomly sampled from a training microstructure
     :param data: data path
@@ -31,7 +31,7 @@ def batch(data,type,l, sf):
                     img1[img[x:x + l, y:y + l] == phs] = 1
                     data[i, cnt, :, :] = img1
 
-            if Testing:
+            if Testing and vis:
                 for j in range(7):
                     plt.imshow(data[j, 0, :, :]+2*data[j, 1, :, :])
                     plt.pause(0.3)
@@ -70,7 +70,7 @@ def batch(data,type,l, sf):
                     data[i, cnt, :, :] = img1[:,:]
                     # data[i, (cnt+1)%3, :, :] = img1[:,:]
 
-            if Testing:
+            if Testing and vis:
                 for j in range(2):
                     plt.imshow(data[j, 0, :, :] + 2 * data[j, 1, :, :])
                     plt.pause(1)
@@ -98,7 +98,7 @@ def batch(data,type,l, sf):
                 data[i, 1, :, :] = img[x:x + l, y:y + l,1]
                 data[i, 2, :, :] = img[x:x + l, y:y + l,2]
             print('converting')
-            if Testing:
+            if Testing and vis:
                 datatest = np.swapaxes(data,1,3)
                 datatest = np.swapaxes(datatest,1,2)
                 for j in range(5):
@@ -125,7 +125,7 @@ def batch(data,type,l, sf):
                 y = np.random.randint(1, y_max - l - 1)
                 subim = img[x:x + l, y:y + l]
                 data[i, 0, :, :] = subim
-            if Testing:
+            if Testing and vis:
                 for j in range(7):
                     plt.imshow(data[j, 0, :, :])
                     plt.pause(0.3)

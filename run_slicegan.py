@@ -10,7 +10,8 @@ import argparse
 # Define project name
 Project_name = 'NMC_exemplar_final'
 # Specify project folder.
-Project_dir = 'Trained_Generators/NMC'
+# Project_dir = 'Trained_Generators/NMC'
+Project_dir = 'Trained_Generators/new'
 # Run with False to show an image during or after training
 parser = argparse.ArgumentParser()
 parser.add_argument('training', type=int)
@@ -21,12 +22,13 @@ Project_path = util.mkdr(Project_name, Project_dir, Training)
 ## Data Processing
 # Define image  type (colour, grayscale, three-phase or two-phase.
 # n-phase materials must be segmented)
-image_type = 'threephase'
+image_type = 'two-phase'
 # define data type (for colour/grayscale images, must be 'colour' / '
 # greyscale. nphase can be, 'tif', 'png', 'jpg','array')
-data_type = 'tif'
+data_type = 'png'
 # Path to your data. One string for isotrpic, 3 for anisotropic
-data_path = ['Examples/NMC.tif']
+# data_path = ['Examples/NMC.tif']
+data_path = ['Examples/1024-890-max_bw.png']
 
 ## Network Architectures
 # Training image size, no. channels and scale factor vs raw data
@@ -49,6 +51,6 @@ netD, netG = networks.slicegan_nets(Project_path, Training, image_type, dk, ds, 
 
 # Train
 if Training:
-    model.train(Project_path, image_type, data_type, data_path, netD, netG, img_channels, img_size, z_channels, scale_factor)
+    model.train(Project_path, image_type, data_type, data_path, netD, netG, img_channels, img_size, z_channels, scale_factor, False)
 else:
     img, raw, netG = util.test_img(Project_path, image_type, netG(), z_channels, lf=6, periodic=[0, 1, 1])
