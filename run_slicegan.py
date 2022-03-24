@@ -13,16 +13,18 @@ Project_name = 'NMC_exemplar_final'
 # Project_dir = 'Trained_Generators/NMC'
 Project_dir = 'Trained_Generators/new'
 # Run with False to show an image during or after training
-parser = argparse.ArgumentParser()
-parser.add_argument('training', type=int)
-args = parser.parse_args()
-Training = args.training
+# parser = argparse.ArgumentParser()
+# parser.add_argument('training', type=int)
+# args = parser.parse_args()
+# Training = args.training
+Training = True
+Training = False
 Project_path = util.mkdr(Project_name, Project_dir, Training)
 
 ## Data Processing
 # Define image  type (colour, grayscale, three-phase or two-phase.
 # n-phase materials must be segmented)
-image_type = 'two-phase'
+image_type = 'twophase'
 # define data type (for colour/grayscale images, must be 'colour' / '
 # greyscale. nphase can be, 'tif', 'png', 'jpg','array')
 data_type = 'png'
