@@ -21,6 +21,9 @@ def batch(data,type,l, sf, vis=True):
             img = img[::sf,::sf]
             x_max, y_max= img.shape[:]
             phases = np.unique(img)
+            # temporary code, for this png, there is one noisy point, using the following code to remove the single noisy point
+            img[img == phases[0]]=phases[1]
+            phases = np.unique(img)
             data = np.empty([32 * 900, len(phases), l, l])
             for i in range(32 * 900):
                 x = np.random.randint(1, x_max - l-1)
